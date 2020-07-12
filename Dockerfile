@@ -1,7 +1,7 @@
 FROM alpine:latest
 RUN apk update && apk upgrade
 RUN apk add bash git dnsmasq dnscrypt-proxy
-RUN wget https://raw.githubusercontent.com/felixonmars/dnsmasq-china-list/master/install.sh && \
+RUN wget https://raw.githubusercontent.com/mnxzyw/dnsmasq-china-list/master/install.sh && \
 chmod +x install.sh && \
 ./install.sh
 
