@@ -2,6 +2,7 @@ FROM alpine:latest
 
 RUN apk add --update bash git dnsmasq bind-tools curl jq && rm -rf /var/cache/apk/*
 
+WORKDIR /app
 COPY dnscrypt-proxy.toml /etc/dnscrypt-proxy/
 COPY dnsmasq.conf /etc/
 
@@ -32,7 +33,8 @@ RUN addgroup -g 1000 proxy && \
 	touch /etc/dnscrypt-proxy/dnscryptProxy.pid && \
 	chown -R proxy:proxy /etc/dnscrypt-proxy
 
-RUN wget https://raw.githubusercontent.com/mnxzyw/dnsmasq-china-list/master/docker-build-install.sh && bash docker-build-install.sh
+COPY docker-build-install.sh .
+RUN bash docker-build-install.sh
 
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
